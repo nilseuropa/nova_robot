@@ -1,2 +1,4 @@
-# j5_description
-Johnny-5 URDF / XACRO
+# Nova S.A.I.N.T.
+### Strategic Artificially Intelligent Nuclear Transport
+
+![](doc/nova_robot.png)

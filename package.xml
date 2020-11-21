@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>nova_robot</name>
+  <version>0.0.1</version>
+  <description>
+    NOVA Laboratories S.A.I.N.T.
+    (Strategic Artificially Intelligent Nuclear Transport)
+  </description>
+  <maintainer email="marton@neorobot.hu">nilseuropa</maintainer>
+  <license>NO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+</package>

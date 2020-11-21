@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<robot name="saint" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find nova_robot)/xacro/inertia.xacro"/>
+  <xacro:include filename="$(find nova_robot)/xacro/materials.xacro"/>
+
+  <xacro:property name="model_scale" value="0.01"/>
+
+  <link name="base_footprint"/>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 ${pi/2}"/>
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+  </joint>
+
+  <!-- BASE -->
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://nova_robot/meshes/Lower_Body.stl" scale="${model_scale} ${model_scale} ${model_scale}"/>
+      </geometry>
+      <material name="aluminium"/>
+    </visual>
+  </link>
+
+  <joint name="left_tread_joint" type="fixed"> <!-- revolute -->
+    <origin xyz="0.2 -0.05 0.22" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="left_tread"/>
+  </joint>
+  <link name="left_tread">
+    <visual>
+      <origin xyz="-0.15 0.05 -0.22" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://nova_robot/meshes/Tread_Left.stl" scale="${model_scale} ${model_scale} ${model_scale}"/>
+      </geometry>
+      <material name="aluminium"/>
+    </visual>
+  </link>
+
+  <joint name="right_tread_joint" type="fixed"> <!-- revolute -->
+    <origin xyz="-0.2 -0.05 0.22" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="right_tread"/>
+  </joint>
+  <link name="right_tread">
+    <visual>
+      <origin xyz="0.15 0.05 -0.22" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://nova_robot/meshes/Tread_Right.stl" scale="${model_scale} ${model_scale} ${model_scale}"/>
+      </geometry>
+      <material name="aluminium"/>
+    </visual>
+  </link>
+
+  <joint name="rear_wheel_joint" type="fixed"> <!-- continuous -->
+    <origin xyz="0 0.585 0.13" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="rear_wheel"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <link name="rear_wheel">
+    <visual>
+      <origin xyz="0 -0.585 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://nova_robot/meshes/Rear_Wheel.stl" scale="${model_scale} ${model_scale} ${model_scale}"/>
+      </geometry>
+      <material name="aluminium"/>
+    </visual>
+  </link>
+
+  <joint name="upper_body_joint" type="fixed"> <!-- revolute -->
+    <origin xyz="0 0.22 0.82" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="upper_body"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <link name="upper_body">
+    <visual>
+      <origin xyz="0 -0.22 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://nova_robot/meshes/Upper_Body.stl" scale="${model_scale} ${model_scale} ${model_scale}"/>
+      </geometry>
+      <material name="aluminium"/>
+    </visual>
+  </link>
+
+  <!-- LEFT ARM -->
+
+  <joint name="left_shoulder_joint" type="fixed">
+    <origin xyz="0.22 -0.18 0.29" rpy="0 0 0"/>
+    <parent link="upper_body"/>
+    <child link="left_shoulder"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <link name="left_shoulder">
+    <visual>
+      <origin xyz="-0.22 -0.04 -0.204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://nova_robot/meshes/Shoulder_Left.stl" scale="${model_scale} ${model_scale} ${model_scale}"/>
+      </geometry>
+      <material name="aluminium"/>
+    </visual>
+  </link>
+
+  <joint name="left_upper_arm_joint" type="fixed">
+    <origin xyz="0.06 0 -0.2" rpy="0 0 0"/>
+    <parent link="left_shoulder"/>
+    <child link="left_upper_arm"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <link name="left_upper_arm">
+    <visual>
+      <origin xyz="-0.28 -0.04 -0.31" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://nova_robot/meshes/UpperArm_Left.stl" scale="${model_scale} ${model_scale} ${model_scale}"/>
+      </geometry>
+      <material name="aluminium"/>
+    </visual>
+  </link>
+
+  <joint name="left_lower_arm_joint" type="fixed">
+    <origin xyz="0 -0.03 -0.275" rpy="0 0 0"/>
+    <parent link="left_upper_arm"/>
+    <child link="left_lower_arm"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <link name="left_lower_arm">
+    <visual>
+      <origin xyz="-0.28 -0.0115 -0.075" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://nova_robot/meshes/LowerArm.stl" scale="${model_scale} ${model_scale} ${model_scale}"/>
+      </geometry>
+      <material name="aluminium"/>
+    </visual>
+  </link>
+
+  <!-- RIGHT ARM -->
+
+  <joint name="right_shoulder_joint" type="fixed">
+    <origin xyz="-0.22 -0.18 0.29" rpy="0 0 0"/>
+    <parent link="upper_body"/>
+    <child link="right_shoulder"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <link name="right_shoulder">
+    <visual>
+      <origin xyz="0.22 -0.04 -0.204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://nova_robot/meshes/Shoulder_Right.stl" scale="${model_scale} ${model_scale} ${model_scale}"/>
+      </geometry>
+      <material name="aluminium"/>
+    </visual>
+  </link>
+
+  <joint name="right_upper_arm_joint" type="fixed">
+    <origin xyz="-0.06 0 -0.2" rpy="0 0 0"/>
+    <parent link="right_shoulder"/>
+    <child link="right_upper_arm"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <link name="right_upper_arm">
+    <visual>
+      <origin xyz="-0.28 -0.04 -0.31" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://nova_robot/meshes/UpperArm_Left.stl" scale="${model_scale} ${model_scale} ${model_scale}"/>
+      </geometry>
+      <material name="aluminium"/>
+    </visual>
+  </link>
+
+  <joint name="right_lower_arm_joint" type="fixed">
+    <origin xyz="0 -0.03 -0.275" rpy="0 0 0"/>
+    <parent link="right_upper_arm"/>
+    <child link="right_lower_arm"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <link name="right_lower_arm">
+    <visual>
+      <origin xyz="-0.28 -0.0115 -0.075" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://nova_robot/meshes/LowerArm.stl" scale="${model_scale} ${model_scale} ${model_scale}"/>
+      </geometry>
+      <material name="aluminium"/>
+    </visual>
+  </link>
+
+  <joint name="head_joint" type="fixed">
+    <origin xyz="0 -0.22 0.43" rpy="0 0 0"/>
+    <parent link="upper_body"/>
+    <child link="head"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <link name="head">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://nova_robot/meshes/Head.stl" scale="${model_scale} ${model_scale} ${model_scale}"/>
+      </geometry>
+      <material name="aluminium"/>
+    </visual>
+  </link>
+
+</robot>
